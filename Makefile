@@ -6,7 +6,7 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/03/18 18:07:10 by mo0k             ###   ########.fr        #
+#    Updated: 2018/03/18 18:39:22 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ INCS = 				$(INC_PATH)/nm.h \
 
 SRCS_PATH = 		sources
 
-#SRCS_32_PATH =		$(SRCS_PATH)/32
-#SRCS_32 = 			$(SRCS_32_PATH)/32/get_symbol32.c \
-					$(SRCS_32_PATH)/32/handler32.c
+SRCS_32_PATH =		$(SRCS_PATH)/32
+SRCS_32 = 			$(SRCS_32_PATH)/get_symbol32.c \
+					$(SRCS_32_PATH)/handler32.c
 
 SRCS_64_PATH =		$(SRCS_PATH)/64
 SRCS_64 = 			$(SRCS_64_PATH)/get_symbol64.c \
@@ -57,7 +57,7 @@ SRCS_PRINT = 		$(SRCS_PRINT_PATH)/get_printfunc.c \
 					$(SRCS_PRINT_PATH)/hexa.c \
 					$(SRCS_PRINT_PATH)/just_symbolname.c
 
-ALL_SRCS = 			$(SRCS_PATH)/nm.c $(SRCS_OPTIONS) $(SRCS_64) \
+ALL_SRCS = 			$(SRCS_PATH)/nm.c $(SRCS_OPTIONS) $(SRCS_32) $(SRCS_64)\
 					$(SRCS_COMMON) $(SRCS_SORT) $(SRCS_PRINT)
 
 OBJS =				$(ALL_SRCS:%.c=%.o)

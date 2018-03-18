@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:39:20 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 14:45:45 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/18 18:33:14 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void		handler64(void *ptr, t_meta *meta)
 	int first_lc_load_dylib = 1;
 	int first_lc_segment = 1;
 	count = 0;
-	header = (struct mach_header_64*)ptr;
-	lc = ptr + sizeof(struct mach_header_64);
+	header = (t_header64*)ptr;
+	lc = ptr + sizeof(t_header64);
 	while (count < header->ncmds)
 	{
 		if (lc->cmd == LC_SYMTAB)

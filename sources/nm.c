@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:11:01 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 15:49:41 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/18 19:47:32 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void 						nm(void *ptr, t_meta *meta)
 		handler64(ptr, meta);
 	}
 	else if (*(unsigned int*)ptr == MH_MAGIC)
+	{
 		printf("binay 32 bits\n");
+		handler64(ptr, meta);
+	}
 }
 
 

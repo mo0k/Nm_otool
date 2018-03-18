@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 14:34:38 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 18:03:15 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/18 18:40:09 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ enum e_return
 };
 
 typedef t_list			*(*t_sfunc)(t_list*, t_list*);
-typedef void		(*t_pfunc)(t_list*);
+typedef void			(*t_pfunc)(t_list*);
 
 char					*g_stringtab;
 
-typedef struct mach_header_64		t_header64;
 typedef struct load_command			t_lc;
+typedef struct mach_header_64		t_header64;
 typedef struct segment_command_64	t_seg64;
 typedef struct section_64			t_sect64;
+typedef struct mach_header			t_header32;
+typedef struct segment_command		t_seg32;
+typedef struct section				t_sect32;
 
 typedef struct 			s_meta
 {
@@ -42,7 +45,7 @@ typedef struct 			s_meta
 	t_sfunc					sortfunc;
 	t_pfunc					printfunc;
 	t_lc					*seg64;
-	t_lc					*seg;
+	t_lc					*seg32;
 	t_lc					*dylib;
 	t_lc					*symtab;
 	void					*ptr;
