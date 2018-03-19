@@ -6,7 +6,7 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/03/18 18:39:22 by mo0k             ###   ########.fr        #
+#    Updated: 2018/03/18 22:14:58 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,17 +31,18 @@ INCS = 				$(INC_PATH)/nm.h \
 
 SRCS_PATH = 		sources
 
-SRCS_32_PATH =		$(SRCS_PATH)/32
+SRCS_32_PATH =		$(SRCS_PATH)/arch32
 SRCS_32 = 			$(SRCS_32_PATH)/get_symbol32.c \
 					$(SRCS_32_PATH)/handler32.c
 
-SRCS_64_PATH =		$(SRCS_PATH)/64
+SRCS_64_PATH =		$(SRCS_PATH)/arch64
 SRCS_64 = 			$(SRCS_64_PATH)/get_symbol64.c \
 					$(SRCS_64_PATH)/handler64.c	
 
 SRCS_COMMON_PATH =	$(SRCS_PATH)/common
 SRCS_COMMON = 		$(SRCS_COMMON_PATH)/get_dylibname.c \
-					$(SRCS_COMMON_PATH)/handler_symtab.c
+					$(SRCS_COMMON_PATH)/handler_symtab.c \
+					$(SRCS_COMMON_PATH)/infos_external.c
 
 SRCS_OPTIONS_PATH =	$(SRCS_PATH)/options
 SRCS_OPTIONS = 		$(SRCS_OPTIONS_PATH)/get_opts.c
@@ -53,9 +54,10 @@ SRCS_SORT = 		$(SRCS_SORT_PATH)/sort.c \
 
 SRCS_PRINT_PATH =	$(SRCS_PATH)/print
 SRCS_PRINT = 		$(SRCS_PRINT_PATH)/get_printfunc.c \
-					$(SRCS_PRINT_PATH)/default.c \
-					$(SRCS_PRINT_PATH)/hexa.c \
-					$(SRCS_PRINT_PATH)/just_symbolname.c
+					$(SRCS_PRINT_PATH)/option_none.c \
+					$(SRCS_PRINT_PATH)/option_x.c \
+					$(SRCS_PRINT_PATH)/option_j.c \
+					$(SRCS_PRINT_PATH)/option_m.c
 
 ALL_SRCS = 			$(SRCS_PATH)/nm.c $(SRCS_OPTIONS) $(SRCS_32) $(SRCS_64)\
 					$(SRCS_COMMON) $(SRCS_SORT) $(SRCS_PRINT)

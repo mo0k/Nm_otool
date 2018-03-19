@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:31:35 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/16 00:14:10 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/18 21:28:16 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string.h>
 # include <stdint.h>
 
-# define OPTIONS "prjx"
+# define OPTIONS "prjxma"
 # define LEN_OPTIONS (strlen(OPTIONS) > 32) ? 32 : strlen(OPTIONS)
 # define SET_BIT(opts, index) (opts |= (get_mask()[index] | opts))
 # define GET_BIT(opts, index) (get_mask()[index] & opts)
@@ -31,6 +31,17 @@ enum e_options
 	NO_INDEX,
 	NO_VAR_OPTION,
 	BAD_OPTION
+};
+
+enum e_index_opts
+{
+	OPT_P,
+	OPT_R,
+	OPT_J,
+	OPT_X,
+	OPT_M,
+	OPT_A,
+	OPT_ASCII = 32
 };
 
 int			get_opts(int nb_arg, char **args, uint32_t *index, uint32_t *opts);

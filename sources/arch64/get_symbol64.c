@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 18:34:53 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/19 09:11:40 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ char 				*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn)
 	static int 		type_value[0x3] = {N_UNDF, N_ABS, N_INDR};
 	static char 	*symbol_ref[SYMBOL_REF_OTHER_ROWMAX][SYMBOL_REF_COLMAX] =
 	{
-		{"__undefined", "u"},
-		{"__absolute", "a"},
-		{"__indirect", "i"},
+		{"undefined", "u"},
+		{"absolute", "a"},
+		{"indirect", "i"},
 	};
 
 	if ((nlist->n_type & N_TYPE) == N_SECT)
 		return (get_symbol_sect64(buf
 					, get_sect64_name(g_meta.seg64, nlist->n_sect)
-					, CHAR, (nlist->n_type & N_EXT)));
+					, colomn, (nlist->n_type & N_EXT)));
 	index = -0x1;
 	while (++index < 0x3)
 		if (type_value[index] == (nlist->n_type & N_TYPE))
@@ -95,4 +95,25 @@ char 				*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn)
 		buf[0] -= 0x20; //32
 	return (buf);
 }
-/* */
+
+char 		*get_seg64_name(t_lc *lc, unsigned int index)
+{
+	unsigned int 	count;
+	t_seg64			*seg64;
+	if (!lc)
+		return (NULL);
+	count = 0;
+	while (count < index)
+	{
+		seg64 = (t_seg64*)lc;
+		if (count + seg64->nsects < index)
+		{
+			count += seg64->nsects;
+			lc = (void*)lc + lc->cmdsize;
+		}
+		else
+			return (seg64->segname);
+	}
+	ft_printf("return NULL\n");
+	return (NULL);
+}
