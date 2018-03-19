@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 20:37:50 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/19 15:18:49 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/19 18:17:53 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void						print_option_m(t_list *list)
 	if (!list)
 		return ;
 	elem = list->content;
-	if (elem->n_type & N_STAB && !GET_BIT(g_meta.options, OPT_A))
+	if (((elem->n_type & N_STAB) && !GET_BIT(g_meta.options, OPT_A))
+		|| ((elem->n_type & N_TYPE) != N_UNDF && GET_BIT(g_meta.options, OPT_u))
+		|| ((elem->n_type & N_TYPE) == N_UNDF && GET_BIT(g_meta.options, OPT_U)))
 		return ;
 	if (elem->n_value)
 		printf("%016llx ", elem->n_value);

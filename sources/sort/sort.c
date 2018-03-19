@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 14:50:56 by jmoucade          #+#    #+#             */
-/*   Updated: 2018/03/18 21:28:33 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/19 15:45:16 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void			sort(t_list **lst, uint32_t opts, t_sfunc sfunc)
 		return ;
 	if (sfunc)
 		merge_sort(lst, sfunc);
-	if (GET_BIT(opts, BIT(OPT_R)))
+	if (GET_BIT(opts, OPT_R))
 		ft_lstrev(lst);
 }
