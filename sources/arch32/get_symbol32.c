@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 19:46:21 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/19 15:21:38 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char 				*get_symbol32(char *buf, struct nlist *nlist, int colomn)
 {
 	int 			index;
 	static int 		type_value[0x3] = {N_UNDF, N_ABS, N_INDR};
-	static char 	*symbol_ref[SYMBOL_REF_OTHER_ROWMAX][SYMBOL_REF_COLMAX] =
+	static char 	*symbol_ref[SYMBOL_REF_NOSECT_ROWMAX][SYMBOL_REF_COLMAX] =
 	{
 		{"__undefined", "u"},
 		{"__absolute", "a"},

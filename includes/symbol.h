@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:36:16 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/19 08:58:49 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/19 14:57:34 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define SYMBOL_REF_COLMAX 0x2
 # define SYMBOL_REF_SECT_ROWMAX 0x4
-# define SYMBOL_REF_OTHER_ROWMAX 0x3
+# define SYMBOL_REF_NOSECT_ROWMAX 0x4
 
 # include <mach-o/nlist.h>
 # include <libft.h>

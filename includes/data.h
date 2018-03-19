@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 14:34:38 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 18:40:09 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/19 15:21:00 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct section				t_sect32;
 
 typedef struct 			s_meta
 {
-	char 					buf[80];
 	uint32_t				options;
 	t_sfunc					sortfunc;
 	t_pfunc					printfunc;

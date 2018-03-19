@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/19 09:11:40 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/19 14:59:18 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,21 @@ static char 		*get_sect64_name(t_lc *lc, unsigned int index)
 char 				*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn)
 {
 	int 			index;
-	static int 		type_value[0x3] = {N_UNDF, N_ABS, N_INDR};
-	static char 	*symbol_ref[SYMBOL_REF_OTHER_ROWMAX][SYMBOL_REF_COLMAX] =
+	static int 		type_value[0x4] = {N_UNDF, N_ABS, N_INDR, N_STAB};
+	static char 	*symbol_ref[SYMBOL_REF_NOSECT_ROWMAX][SYMBOL_REF_COLMAX] =
 	{
 		{"undefined", "u"},
 		{"absolute", "a"},
 		{"indirect", "i"},
+		{"?", "-"}
 	};
 
 	if ((nlist->n_type & N_TYPE) == N_SECT)
 		return (get_symbol_sect64(buf
 					, get_sect64_name(g_meta.seg64, nlist->n_sect)
 					, colomn, (nlist->n_type & N_EXT)));
+	if (nlist->n_type & N_STAB)
+		return (symbol_ref[0x3][colomn]);
 	index = -0x1;
 	while (++index < 0x3)
 		if (type_value[index] == (nlist->n_type & N_TYPE))
