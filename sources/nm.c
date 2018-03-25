@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:11:01 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 19:47:32 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/25 22:12:05 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,32 @@ int							usage()
 
 void 						nm(void *ptr, t_meta *meta)
 {
-	if (!ptr || !meta || !meta->printfunc)
+	if (!ptr || !meta)
 		return ;
+	g_meta.sortfunc = get_sortfunc(g_meta.options);
 	if (*(unsigned int*)ptr == MH_MAGIC_64)
 	{
-		//printf("binary 64 bits\n");
+		printf("binary 64 bits\n");
+		g_meta.printfunc = get_printfunc_arch64(g_meta.options);
 		handler64(ptr, meta);
 	}
 	else if (*(unsigned int*)ptr == MH_MAGIC)
 	{
 		printf("binay 32 bits\n");
-		handler64(ptr, meta);
+		g_meta.printfunc = get_printfunc_arch32(g_meta.options);
+		handler32(ptr, meta);
+	}
+	else if (*(unsigned int*)ptr == FAT_MAGIC || *(unsigned int*)ptr == FAT_CIGAM)
+	{
+		printf("FAT 32\n");
+		printf("magic number:0x%08x\n", *(unsigned int*)ptr);
+		handler_fat32(ptr, meta);
+	}
+	else if (*(unsigned int*)ptr == FAT_MAGIC_64 || *(unsigned int*)ptr == FAT_CIGAM_64)
+	{
+		printf("FAT 64\n");
+		printf("magic number:0x%08x\n", *(unsigned int*)ptr);
+
 	}
 }
 
@@ -66,6 +81,7 @@ int 						load_file(void **ptr, size_t *ptr_size, char *filepath)
 		perror(ERROR_STR);
 		return (ERROR_MMAP);
 	}
+	printf("load file OK\n");
 	return (0);
 }
 
@@ -79,8 +95,6 @@ int							main(int ac, char **av)
 		return usage();
 	if ((error = get_opts(ac - 1, av + 1, &index ,&g_meta.options)))
 		return (print_error(error));
-	g_meta.sortfunc = get_sortfunc(g_meta.options);
-	g_meta.printfunc = get_printfunc(g_meta.options);
 	if ((error = load_file(&g_meta.ptr, &g_meta.ptr_size, av[index])))
 		return (error);
 	nm(g_meta.ptr, &g_meta);

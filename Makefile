@@ -6,13 +6,13 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/03/18 22:14:58 by mo0k             ###   ########.fr        #
+#    Updated: 2018/03/25 20:38:38 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =				nm
 
-CFLAGS =			-Wall -Werror -Wextra
+CFLAGS =			-Wall -Werror -Wextra -g
 CC = 				gcc $(CFLAGS)
 
 LIBPRINT_PATH =		libftprintf
@@ -33,6 +33,7 @@ SRCS_PATH = 		sources
 
 SRCS_32_PATH =		$(SRCS_PATH)/arch32
 SRCS_32 = 			$(SRCS_32_PATH)/get_symbol32.c \
+					$(SRCS_32_PATH)/handler_fat.c \
 					$(SRCS_32_PATH)/handler32.c
 
 SRCS_64_PATH =		$(SRCS_PATH)/arch64
@@ -42,6 +43,8 @@ SRCS_64 = 			$(SRCS_64_PATH)/get_symbol64.c \
 SRCS_COMMON_PATH =	$(SRCS_PATH)/common
 SRCS_COMMON = 		$(SRCS_COMMON_PATH)/get_dylibname.c \
 					$(SRCS_COMMON_PATH)/handler_symtab.c \
+					$(SRCS_COMMON_PATH)/get_type_stab.c \
+					$(SRCS_COMMON_PATH)/swap_bit.c \
 					$(SRCS_COMMON_PATH)/infos_external.c
 
 SRCS_OPTIONS_PATH =	$(SRCS_PATH)/options
@@ -52,12 +55,21 @@ SRCS_SORT = 		$(SRCS_SORT_PATH)/sort.c \
 					$(SRCS_SORT_PATH)/get_sortfunc.c \
 					$(SRCS_SORT_PATH)/sort_ascii.c
 
-SRCS_PRINT_PATH =	$(SRCS_PATH)/print
-SRCS_PRINT = 		$(SRCS_PRINT_PATH)/get_printfunc.c \
-					$(SRCS_PRINT_PATH)/option_none.c \
-					$(SRCS_PRINT_PATH)/option_x.c \
-					$(SRCS_PRINT_PATH)/option_j.c \
-					$(SRCS_PRINT_PATH)/option_m.c
+SRCS_PRINT_PATH = 			$(SRCS_PATH)/print
+SRCS_PRINT_ARCH64_PATH =	$(SRCS_PRINT_PATH)/arch64
+SRCS_PRINT_ARCH64 = 		$(SRCS_PRINT_ARCH64_PATH)/get_printfunc64.c \
+							$(SRCS_PRINT_ARCH64_PATH)/option_none64.c \
+							$(SRCS_PRINT_ARCH64_PATH)/option_x64.c \
+							$(SRCS_PRINT_ARCH64_PATH)/option_j64.c \
+							$(SRCS_PRINT_ARCH64_PATH)/option_m64.c
+SRCS_PRINT_ARCH32_PATH =	$(SRCS_PRINT_PATH)/arch32
+SRCS_PRINT_ARCH32 = 		$(SRCS_PRINT_ARCH32_PATH)/get_printfunc32.c \
+							$(SRCS_PRINT_ARCH32_PATH)/option_none32.c \
+							$(SRCS_PRINT_ARCH32_PATH)/option_x32.c \
+							$(SRCS_PRINT_ARCH32_PATH)/option_j32.c \
+							$(SRCS_PRINT_ARCH32_PATH)/option_m32.c
+
+SRCS_PRINT = 		$(SRCS_PRINT_ARCH64) $(SRCS_PRINT_ARCH32)
 
 ALL_SRCS = 			$(SRCS_PATH)/nm.c $(SRCS_OPTIONS) $(SRCS_32) $(SRCS_64)\
 					$(SRCS_COMMON) $(SRCS_SORT) $(SRCS_PRINT)

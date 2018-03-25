@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_printfunc.c                                    :+:      :+:    :+:   */
+/*   swap_bit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/18 15:27:17 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/19 15:54:03 by mo0k             ###   ########.fr       */
+/*   Created: 2018/03/25 20:32:46 by mo0k              #+#    #+#             */
+/*   Updated: 2018/03/25 22:26:37 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <print.h>
-
-t_pfunc						get_printfunc(uint32_t options)
+#include <common.h>
+#include<stdio.h>
+uint32_t		swap_bit(uint32_t value)
 {
-	if (GET_BIT(options, OPT_J))
-		return (&print_option_j);
-	else if (GET_BIT(options, OPT_X))
-		return (&print_option_x);
-	else if (GET_BIT(options, OPT_M))
-		return (&print_option_m);
-	else
-		return (&print_option_none);
+	uint32_t	result = 0x0;
+
+	//printf("value:  0x%08x\n", value); 
+	result |= (value >> 24);
+	result |= (value >> 8) & 0xFF00;
+	result |= (value << 8) & 0xFF0000;
+	result |= (value << 24) & 0xFF000000;
+
+	//printf("result: 0x%08x\n", result); 
+	return (result);
 }

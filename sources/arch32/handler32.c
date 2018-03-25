@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:39:20 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 18:33:47 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/22 22:55:37 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void		handler32(void *ptr, t_meta *meta)
 		lc = (void*)lc + lc->cmdsize;
 		++count;
 	}
-	handler_systab((void*)meta->symtab, ptr, meta);
+	handler_systab32((void*)meta->symtab, ptr, meta);
 }

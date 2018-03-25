@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_none.c                                      :+:      :+:    :+:   */
+/*   get_type_stab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/18 15:31:47 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/19 21:56:57 by mo0k             ###   ########.fr       */
+/*   Created: 2018/03/22 22:46:48 by mo0k              #+#    #+#             */
+/*   Updated: 2018/03/22 22:48:14 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <print.h>
+#include <common.h>
 
 char *get_type_stab(uint8_t ntype)
 {
@@ -31,30 +31,4 @@ char *get_type_stab(uint8_t ntype)
 		if (ntype == tab_i[i])
 			return (tab_s[i]);
 	return (NULL);
-}
-void						print_option_none(t_list *list)
-{
-	struct nlist_64*			elem;
-	char 						buf[85];
-
-	if (!list)
-		return ;
-	elem = list->content;
-	if (((elem->n_type & N_STAB) && !GET_BIT(g_meta.options, OPT_A))
-		|| ((elem->n_type & N_TYPE) != N_UNDF && GET_BIT(g_meta.options, OPT_u))
-		|| ((elem->n_type & N_TYPE) == N_UNDF && GET_BIT(g_meta.options, OPT_U)))
-		return;
-	if (elem->n_value)
-		printf("%016llx ", elem->n_value);
-	else
-		printf("%16s ", "");
-	if (elem->n_type & N_STAB)
-		printf("%s %02x %04x %5s %s\n", get_symbol64(buf, elem, CHAR)
-			 			, 	elem->n_sect
-						,	elem->n_desc
-						, get_type_stab(elem->n_type)
-						, g_stringtab + elem->n_un.n_strx);
-	else
-		printf("%s %s\n", get_symbol64(buf, elem, CHAR)
-					, g_stringtab + elem->n_un.n_strx);
 }

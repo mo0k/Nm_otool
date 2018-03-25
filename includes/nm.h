@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:39:22 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 18:08:25 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/25 22:12:19 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <sys/stat.h>
 # include <sys/mman.h>
 # include <fcntl.h>
+# include <mach-o/fat.h>
+
 
 # include <sort.h>
 # include <print.h>
@@ -35,5 +37,8 @@
 // indirect			i /
 
 # define ERROR_STR "./nm :"
+
+void 						nm(void *ptr, t_meta *meta);
+
 
 #endif
