@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 20:37:50 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/31 23:13:04 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/04/01 19:43:35 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void						print_option_m_arch64(t_list *list)
 	if (!list)
 		return ;
 	elem = list->content;
-	if (((elem->n_type & N_STAB) && !GET_BIT(g_meta.options, OPT_A))
+	if (((elem->n_type & N_STAB) && !GET_BIT(g_meta.options, OPT_a))
 		|| ((elem->n_type & N_TYPE) != N_UNDF && GET_BIT(g_meta.options, OPT_u))
 		|| ((elem->n_type & N_TYPE) == N_UNDF && GET_BIT(g_meta.options, OPT_U)))
 		return ;
-	if (SWAP64(g_meta.swap, elem->n_value))
+	if (SWAP64(g_meta.swap, elem->n_value) || (GET_BIT(g_meta.options, OPT_a) && (elem->n_type & N_STAB)))
 		ft_printf("%016llx ", SWAP64(g_meta.swap, elem->n_value));
 	else
 		ft_printf("%16s ", "");

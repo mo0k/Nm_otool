@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:31:35 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/31 15:27:32 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/04/01 19:40:39 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ enum e_options
 
 enum e_index_opts
 {
-	OPT_P,
-	OPT_R,
-	OPT_J,
-	OPT_X,
-	OPT_M,
-	OPT_A,
+	OPT_p,
+	OPT_r,
+	OPT_j,
+	OPT_x,
+	OPT_m,
+	OPT_a,
 	OPT_u,
 	OPT_U,
 	OPT_ASCII = 32
