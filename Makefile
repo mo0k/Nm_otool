@@ -6,13 +6,13 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/03/25 20:38:38 by mo0k             ###   ########.fr        #
+#    Updated: 2018/03/31 15:13:43 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =				nm
 
-CFLAGS =			-Wall -Werror -Wextra -g
+CFLAGS =			-Wall -Werror -Wextra -g -v
 CC = 				gcc $(CFLAGS)
 
 LIBPRINT_PATH =		libftprintf
@@ -24,27 +24,33 @@ INCS = 				$(INC_PATH)/nm.h \
 					$(INC_PATH)/data.h \
 					$(INC_PATH)/common.h \
 					$(INC_PATH)/get_opts.h \
-					$(INC_PATH)/handler.h \
 					$(INC_PATH)/symbol.h \
 					$(INC_PATH)/sort.h \
-					$(INC_PATH)/print.h
+					$(INC_PATH)/swap_bits.h \
+					$(INC_PATH)/arch32.h \
+					$(INC_PATH)/arch64.h \
+					$(INC_PATH)/print.h \
+					$(INC_PATH)/debug.h
+
 
 SRCS_PATH = 		sources
 
 SRCS_32_PATH =		$(SRCS_PATH)/arch32
-SRCS_32 = 			$(SRCS_32_PATH)/get_symbol32.c \
+SRCS_32 = 			$(SRCS_32_PATH)/get_symbol.c \
 					$(SRCS_32_PATH)/handler_fat.c \
-					$(SRCS_32_PATH)/handler32.c
+					$(SRCS_32_PATH)/handler_symtab.c \
+					$(SRCS_32_PATH)/handler.c
 
 SRCS_64_PATH =		$(SRCS_PATH)/arch64
-SRCS_64 = 			$(SRCS_64_PATH)/get_symbol64.c \
-					$(SRCS_64_PATH)/handler64.c	
+SRCS_64 = 			$(SRCS_64_PATH)/get_symbol.c \
+					$(SRCS_64_PATH)/handler_symtab.c \
+					$(SRCS_64_PATH)/handler.c	
 
 SRCS_COMMON_PATH =	$(SRCS_PATH)/common
 SRCS_COMMON = 		$(SRCS_COMMON_PATH)/get_dylibname.c \
-					$(SRCS_COMMON_PATH)/handler_symtab.c \
 					$(SRCS_COMMON_PATH)/get_type_stab.c \
 					$(SRCS_COMMON_PATH)/swap_bit.c \
+					$(SRCS_COMMON_PATH)/corrupted.c \
 					$(SRCS_COMMON_PATH)/infos_external.c
 
 SRCS_OPTIONS_PATH =	$(SRCS_PATH)/options

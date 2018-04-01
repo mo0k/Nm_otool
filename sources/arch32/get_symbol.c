@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_symbol32.c                                     :+:      :+:    :+:   */
+/*   get_symbol.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/25 23:14:37 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/31 12:14:36 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <symbol.h>
+#include <arch32.h>
 
 static char 		*get_symbol_sect32(char *buf, t_info *info, int colomn, \
 																int is_external)
@@ -60,9 +60,14 @@ static t_info 		*get_sect32_info(t_lc *lc, unsigned int index, t_info *sect)
 	while (count < index)
 	{
 		seg32 = (t_seg32*)lc;
+		if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)seg32)
+			|| CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)(seg32 + 1)))
+				corrupted("get_sect32_info 1");
 		if (count + seg32->nsects < index)
 		{
 			count += seg32->nsects;
+			//if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + lc->cmdsize))
+			//	corrupted();
 			lc = (void*)lc + lc->cmdsize;
 		}
 		else
@@ -72,6 +77,8 @@ static t_info 		*get_sect32_info(t_lc *lc, unsigned int index, t_info *sect)
 			//return ((sect32 + (index - count) - 1)->sectname);
 			//ft_printf("seg32->segname:%s, sect32->sectname:%s\n", seg32->segname, sect32->sectname);
 			sect->segname = (void*)seg32->segname;
+			if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)(sect32 + (index - count))))
+				corrupted("get_sect32_info 2");
 			sect->sectname = (void*)(sect32 + (index - count) - 1)->sectname;
 			//ft_printf("sect->segname:%s, sect->sectname:%s\n", (char*)sect->segname, (char*)sect->sectname);
 			return (sect);
@@ -131,6 +138,8 @@ char 		*get_seg32_name(t_lc *lc, unsigned int index)
 		if (count + seg32->nsects < index)
 		{
 			count += seg32->nsects;
+			if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + lc->cmdsize))
+				corrupted("get_seg32_name");
 			lc = (void*)lc + lc->cmdsize;
 		}
 		else

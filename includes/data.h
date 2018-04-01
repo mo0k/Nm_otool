@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 14:34:38 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/25 20:46:27 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/28 22:54:18 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct 			s_meta
 	t_lc					*symtab;
 	uint8_t					swap;
 	void					*ptr;
-	size_t					ptr_size;
+	size_t					size;
 }							t_meta;
 
 t_meta			g_meta;

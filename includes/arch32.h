@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.h                                          :+:      :+:    :+:   */
+/*   arch32.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/18 14:43:17 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/25 22:11:10 by mo0k             ###   ########.fr       */
+/*   Created: 2018/03/29 06:51:43 by mo0k              #+#    #+#             */
+/*   Updated: 2018/03/29 17:33:47 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HANDLER_H
-# define HANDLER_H
+#ifndef ARCH32_H
+# define ARCH32_H
 
-# include <mach-o/fat.h>
+# include <mach-o/nlist.h>
 # include <libft.h>
 # include <ft_printf.h>
-# include <sort.h>
 # include <data.h>
-# include <common.h>
 # include <nm.h>
+# include <swap_bits.h>
+# include <common.h>
+# include <symbol.h>
+# include <sort.h>
 
-# define SWAP(f, v) ((f) ? swap_bit(v) : v)
-
-# ifndef DEBUG
-#  define DEBUG 1
-# endif
-
-void		handler64(void *ptr, t_meta *meta);
-void		handler32(void *ptr, t_meta *meta);
-void		handler_systab64(void* lc, void *ptr, t_meta *meta);
-void		handler_systab32(void* lc, void *ptr, t_meta *meta);
 void		handler_fat32(void *ptr, t_meta *meta);
+void		handler32(void *ptr, t_meta *meta);
+void		handler_symtab32(void* lc, void *ptr, t_meta *meta);
+char 		*get_seg32_name(t_lc *lc, unsigned int index);
+char 		*get_symbol32(char *buf, struct nlist *nlist, int colomn);
 
 
 #endif

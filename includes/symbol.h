@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:36:16 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/24 18:55:18 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/29 07:01:59 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@
 # define SYMBOL_REF_SECT_ROWMAX 0x5
 # define SYMBOL_REF_NOSECT_COLMAX 0x2
 # define SYMBOL_REF_NOSECT_ROWMAX 0x4
-
-# include <mach-o/nlist.h>
-# include <libft.h>
-# include <ft_printf.h>
-# include <data.h>
 
 typedef struct 	s_info
 {
@@ -50,8 +45,5 @@ enum 		symbol_row_ref_sect
 	BSS,
 	COMMON
 };
-
-char 		*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn);
-char 		*get_symbol32(char *buf, struct nlist *nlist, int colomn);
 
 #endif

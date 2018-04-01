@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:39:22 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/25 22:12:19 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/31 15:14:36 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 # include <sort.h>
 # include <print.h>
 # include <get_opts.h>
-# include <handler.h>
+# include <arch32.h>
+# include <arch64.h>
+# include <debug.h>
 
-# define DEBUG 1
 //void 			*g_symtab;
 
 // undefined		u \

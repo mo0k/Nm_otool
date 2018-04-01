@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:01:17 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/25 14:56:15 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/31 21:16:24 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,18 @@ char 		*get_dylibname(struct load_command *lc, unsigned int index)
 		return (NULL);
 	count = 0;
 	while (count++ < index)
-		lc = (void*)lc + lc->cmdsize;
+	{
+		if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + SWAP32(g_meta.swap, lc->cmdsize)))
+			corrupted("get_dylibname 1");
+		lc = (void*)lc + SWAP32(g_meta.swap, lc->cmdsize);
+	}
 	dylib = (t_dylib*)(lc + 1);
-	ptr = strrchr((void*)dylib + dylib->name.offset, '/');
-	return ((ptr) ? ptr + 1 : (void*)dylib + dylib->name.offset);
+	//check dylib strcut
+	if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)(dylib + 1))
+		|| CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size,
+			(void*)dylib + SWAP32(g_meta.swap, dylib->name.offset)))
+		corrupted("get_dylibname 2");
+	ptr = strrchr((void*)dylib + SWAP32(g_meta.swap, dylib->name.offset), '/');
+	return ((ptr) ? ptr + 1 : (void*)dylib + SWAP32(g_meta.swap, dylib->name.offset));
 	//return ((void*)dylib + dylib->name.offset);
 }

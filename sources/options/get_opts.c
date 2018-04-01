@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:31:07 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/18 15:21:22 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/31 15:27:06 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int				get_opts(int nb_arg, char **args, uint32_t *index, uint32_t *opts)
 		//++i;
 	}
 	*index = i + 1;
-	printf("opt:0x%02x\t%d\t%d\n", *opts, *opts, i);
+	P_DEBUG_VARGS("opt:0x%02x\t%d\t%d\n", *opts, *opts, i);
 	return (SUCCESS);
 }
 

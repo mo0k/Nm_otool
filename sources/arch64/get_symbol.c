@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_symbol64.c                                     :+:      :+:    :+:   */
+/*   get_symbol.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/25 23:27:12 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/31 15:05:49 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <symbol.h>
+#include <arch64.h>
 
 static char 		*get_symbol_sect64(char *buf, t_info *info, int colomn, \
 																int is_external)
@@ -28,6 +28,7 @@ static char 		*get_symbol_sect64(char *buf, t_info *info, int colomn, \
 	colomn = colomn > SYMBOL_REF_SECT_COLMAX - 1 ? SYMBOL_REF_SECT_COLMAX - 1: colomn;
 	while (++i < SYMBOL_REF_SECT_ROWMAX)
 	{
+		//printf("test\n");
 		//ft_printf("ssymbol_ref[i][SEGNAME]:%s, symbol_ref[i][SECTNAME]:%s\n", symbol_ref[i][SEGNAME], symbol_ref[i][SECTNAME]);
 		//ft_printf("((t_seg64*)(info))->segname:%s, ((t_sect64*)(info))->sectname:%s\n", ((t_seg64*)(info))->segname, ((t_sect64*)(info))->sectname);
 		if (!ft_strcmp((char*)info->segname, symbol_ref[i][SEGNAME])
@@ -42,7 +43,7 @@ static char 		*get_symbol_sect64(char *buf, t_info *info, int colomn, \
 	}
 	if (!(buf = ft_strcpy(buf, colomn == SECTNAME ? (char*)info->sectname : "s")))
 				return (NULL);
-			ft_printf("debug:%s\n", buf);
+			//ft_printf("debug:%s\n", buf);
 			if (colomn == SYMBOL_CHAR && is_external)
 				buf[0] -= 32; //upper case
 			return (buf);
@@ -66,6 +67,8 @@ static t_info 		*get_sect64_info(t_lc *lc, unsigned int index, t_info *info)
 		if (count + seg64->nsects < index)
 		{
 			count += seg64->nsects;
+			if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + lc->cmdsize))
+				corrupted("get_sect64_info");
 			lc = (void*)lc + lc->cmdsize;
 		}
 		else
@@ -74,7 +77,7 @@ static t_info 		*get_sect64_info(t_lc *lc, unsigned int index, t_info *info)
 			info->segname = (void*)seg64->segname;
 			//sect->sectname = (void*)sect64->sectname;
 			info->sectname = (void*)(sect64 + (index - count) - 1)->sectname;
-			ft_printf("seg64->segname:%s, sect64->sectname:%s\n", info->segname, info->sectname);
+			//ft_printf("seg64->segname:%s, sect64->sectname:%s\n", info->segname, info->sectname);
 			return (info);
 			//return ((sect64 + (index - count) - 1)->sectname);
 		}
@@ -128,6 +131,8 @@ char 		*get_seg64_name(t_lc *lc, unsigned int index)
 		if (count + seg64->nsects < index)
 		{
 			count += seg64->nsects;
+			if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + lc->cmdsize))
+				corrupted("get_seg64_name");
 			lc = (void*)lc + lc->cmdsize;
 		}
 		else

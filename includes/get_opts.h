@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:31:35 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/19 15:54:14 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/03/31 15:27:32 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdint.h>
+# include <debug.h>
 
 # define OPTIONS "prjxmauU"
 # define LEN_OPTIONS (strlen(OPTIONS) > 32) ? 32 : strlen(OPTIONS)
