@@ -6,13 +6,13 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/03/31 15:13:43 by mo0k             ###   ########.fr        #
+#    Updated: 2018/04/01 19:32:05 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =				nm
 
-CFLAGS =			-Wall -Werror -Wextra -g -v
+CFLAGS =			-Wall -Werror -Wextra -g
 CC = 				gcc $(CFLAGS)
 
 LIBPRINT_PATH =		libftprintf
