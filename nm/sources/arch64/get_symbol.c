@@ -67,19 +67,16 @@ static t_info 		*get_sect64_info(t_lc *lc, unsigned int index, t_info *info)
 		if (count + seg64->nsects < index)
 		{
 			count += seg64->nsects;
-			if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + lc->cmdsize))
+			if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)lc + lc->cmdsize))
 				corrupted("get_sect64_info");
 			lc = (void*)lc + lc->cmdsize;
 		}
 		else
 		{
 			sect64 = (t_sect64*)(seg64 + 1);
-			info->segname = (void*)seg64->segname;
-			//sect->sectname = (void*)sect64->sectname;
+			info->segname = (void*)(sect64 + (index - count) - 1)->segname;
 			info->sectname = (void*)(sect64 + (index - count) - 1)->sectname;
-			//ft_printf("seg64->segname:%s, sect64->sectname:%s\n", info->segname, info->sectname);
 			return (info);
-			//return ((sect64 + (index - count) - 1)->sectname);
 		}
 	}
 	return (NULL);
@@ -95,20 +92,23 @@ char 				*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn)
 		{"undefined", "u"},
 		{"absolute", "a"},
 		{"indirect", "i"},
+		{"common", "c"},
 		{"?", "-"}
 	};
 
 	if ((nlist->n_type & N_TYPE) == N_SECT)
 		return (get_symbol_sect64(buf
-					, get_sect64_info(g_meta.seg64, nlist->n_sect, &info)
+					, get_sect64_info(g_meta->seg64, nlist->n_sect, &info)
 					, colomn, (nlist->n_type & N_EXT)));
 	if (nlist->n_type & N_STAB)
-		return (symbol_ref[0x3][colomn]);
+		return (symbol_ref[0x4][colomn]);
 	index = -0x1;
 	while (++index < 0x3)
 		if (type_value[index] == (nlist->n_type & N_TYPE))
 			break;
-	if (type_value[index] != (nlist->n_type & N_TYPE))
+	if (type_value[index] == N_UNDF && SWAP64(g_meta->swap, nlist->n_value) != 0)
+		index = COMMON;
+	if (index != COMMON && type_value[index] != (nlist->n_type & N_TYPE))
 		return (" ");
 	colomn = colomn > SYMBOL_REF_NOSECT_COLMAX - 0x1 ? SYMBOL_REF_NOSECT_COLMAX - 0x1: colomn;
 	if (!(buf = ft_strcpy(buf, symbol_ref[index][colomn])))
@@ -131,7 +131,7 @@ char 		*get_seg64_name(t_lc *lc, unsigned int index)
 		if (count + seg64->nsects < index)
 		{
 			count += seg64->nsects;
-			if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + lc->cmdsize))
+			if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)lc + lc->cmdsize))
 				corrupted("get_seg64_name");
 			lc = (void*)lc + lc->cmdsize;
 		}

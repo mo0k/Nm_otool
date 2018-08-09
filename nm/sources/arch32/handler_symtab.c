@@ -31,27 +31,33 @@ void						handler_symtab32(void* lc, void *ptr, t_meta *meta)
 	stab_command = (struct symtab_command*)lc;
 	if (DEBUG)
 	{
-		ft_printf("cmd:0x%x\n", stab_command->cmd);
-		ft_printf("cmdsize:%d\n", stab_command->cmdsize);
-		ft_printf("symoff:%d\n", stab_command->symoff);
-		ft_printf("nsyms:%d\n", stab_command->nsyms);
-		ft_printf("stroff:%d\n", stab_command->stroff);
-		ft_printf("strsize:%d\n", stab_command->strsize);
+		ft_printf("cmd:0x%x\n", SWAP32(meta->swap, stab_command->cmd));
+		ft_printf("cmdsize:%d\n", SWAP32(meta->swap, stab_command->cmdsize));
+		ft_printf("symoff:%d\n", SWAP32(meta->swap, stab_command->symoff));
+		ft_printf("nsyms:%d\n", SWAP32(meta->swap, stab_command->nsyms));
+		ft_printf("stroff:%d\n", SWAP32(meta->swap, stab_command->stroff));
+		ft_printf("strsize:%d\n", SWAP32(meta->swap, stab_command->strsize));
 	}
-	if (CHK_VAL(ptr, ptr + meta->size, ptr + stab_command->symoff)
-		|| CHK_VAL(ptr, ptr + meta->size, ptr + stab_command->stroff))
+	if (CHK_VAL(ptr, ptr + meta->size, ptr + SWAP32(meta->swap, stab_command->symoff))
+		|| CHK_VAL(ptr, ptr + meta->size, ptr + SWAP32(meta->swap, stab_command->stroff)))
 		corrupted("handler_symtab32 1");
-	nlist = ptr + stab_command->symoff;
-	g_stringtab = ptr + stab_command->stroff;
+	nlist = (struct nlist*)(ptr + SWAP32(meta->swap, stab_command->symoff));
+	//ft_printf("nlist:%p\n", nlist);
+	g_stringtab = ptr + SWAP32(meta->swap, stab_command->stroff);
 	list = 0;
 	//verif nsyms
-	while (++i < stab_command->nsyms)
+	while (++i < SWAP32(meta->swap, stab_command->nsyms))
 	{
 		//add verif
-		if (CHK_VAL(ptr, ptr + meta->size, (void*)(nlist + i + 1))
-			|| CHK_VAL(ptr, ptr + meta->size, (void*)g_stringtab + nlist[i].n_un.n_strx))
+		//printf("i:%d\n", i);
+		if (CHK_VAL(ptr, ptr + meta->size, (void*)(nlist + i + 1)))
 			corrupted("handler_symtab32 2");
-		ft_lstadd_end(&list, ft_lstnew(&nlist[i], sizeof(struct nlist_64)));
+		//ft_printf("g_stringtab:%p\nadd:%d\nptr:%p\nend:%p\n", g_stringtab, SWAP32(meta->swap, nlist[i].n_un.n_strx), ptr, ptr + meta->size);
+		//printf("str:%s\n", g_stringtab + SWAP32(meta->swap, nlist[i].n_un.n_strx));
+		if (CHK_VAL(ptr, ptr + meta->size, (void*)g_stringtab + SWAP32(meta->swap, nlist[i].n_un.n_strx)))
+			corrupted("handler_symtab32 3");
+		ft_lstadd_end(&list, ft_lstnew(&nlist[i], sizeof(struct nlist)));
+		//sleep(1);
 	}
 	sort(&list, meta->options, meta->sortfunc);
 	ft_lstiter(list, meta->printfunc);

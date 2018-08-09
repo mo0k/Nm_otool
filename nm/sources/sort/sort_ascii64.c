@@ -12,7 +12,7 @@
 
 #include <sort.h>
 
-t_list		*sort_ascii(t_list *l1, t_list *l2)
+t_list		*sort_ascii64(t_list *l1, t_list *l2)
 {
 	t_list	*new;
 
@@ -22,16 +22,16 @@ t_list		*sort_ascii(t_list *l1, t_list *l2)
 	if (!l2)
 		return (l1);
 	//printf("ok\n");
-	if (ft_strcmp(g_stringtab + ((struct nlist_64*)(l1->content))->n_un.n_strx
-			, g_stringtab + ((struct nlist_64*)(l2->content))->n_un.n_strx) > 0)
+	if (ft_strcmp(g_stringtab + SWAP32(g_meta->swap, ((struct nlist_64*)(l1->content))->n_un.n_strx)
+			, g_stringtab + SWAP32(g_meta->swap, ((struct nlist_64*)(l2->content))->n_un.n_strx)) > 0)
 	{
 		new = l2;
-		new->next = sort_ascii(l1, l2->next);
+		new->next = sort_ascii64(l1, l2->next);
 	}
 	else
 	{
 		new = l1;
-		new->next = sort_ascii(l1->next, l2);
+		new->next = sort_ascii64(l1->next, l2);
 	}
 	return (new);
 }

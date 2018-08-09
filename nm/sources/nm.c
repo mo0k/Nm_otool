@@ -29,20 +29,23 @@ static int					is_simplebin(void *ptr)
 
 void 						nm(void *ptr, t_meta *meta)
 {
-	P_DEBUG("Launch function nm\n");
+	P_DEBUG_VARGS("Launch function nm ; ptr(%p)\n", ptr);
 	if (!ptr || !meta)
 		return ;
-	meta->sortfunc = get_sortfunc(meta->options);
+	
 	if (*(unsigned int*)ptr == MH_MAGIC_64 || *(unsigned int*)ptr == MH_CIGAM_64)
 	{
 		P_DEBUG("binary 64 bits\n");
+		meta->sortfunc = get_sortfunc(meta->options, ARCH64);
 		meta->printfunc = get_printfunc_arch64(meta->options);
 		handler64(ptr, meta);
 	}
 	else if (*(unsigned int*)ptr == MH_MAGIC || *(unsigned int*)ptr == MH_CIGAM)
 	{
 		P_DEBUG("binay 32 bits\n");
+		P_DEBUG_VARGS("magic number:0x%08x\n", *(unsigned int*)ptr);
 		meta->printfunc = get_printfunc_arch32(meta->options);
+		meta->sortfunc = get_sortfunc(meta->options, ARCH32);
 		handler32(ptr, meta);
 	}
 	else if (*(unsigned int*)ptr == FAT_MAGIC || *(unsigned int*)ptr == FAT_CIGAM)

@@ -47,4 +47,10 @@ typedef struct 			s_meta
 
 t_meta			*g_meta;
 
+enum e_archtype
+{
+	ARCH32,
+	ARCH64
+};
+
 #endif

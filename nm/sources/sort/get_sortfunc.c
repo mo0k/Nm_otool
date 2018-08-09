@@ -12,14 +12,14 @@
 
 #include <sort.h>
 
-t_sfunc						get_sortfunc(uint32_t options)
+t_sfunc						get_sortfunc(uint32_t options, enum e_archtype type)
 {
 	//if (!options || options->nosort)
 	//	return (NULL);
 	if (GET_BIT(options, OPT_p)) //letter p => no_sort
 		return (NULL);
 	if (GET_BIT(options, OPT_ASCII)) //no letter
-		return (&sort_ascii);
+		return (type == ARCH32 ? &sort_ascii32 : sort_ascii64);
 	else
 		return (NULL);
 }

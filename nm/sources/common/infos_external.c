@@ -14,7 +14,7 @@
 
 char *get_infos_external64(struct nlist_64 *nlist, char *buf)
 {
-	if (SWAP16(g_meta.swap, nlist->n_desc) == REFERENCED_DYNAMICALLY && (nlist->n_type \
+	if (SWAP16(g_meta->swap, nlist->n_desc) == REFERENCED_DYNAMICALLY && (nlist->n_type \
 															& N_EXT))
 		strcpy(buf, "[referenced dynamically] external");
 	else if ((nlist->n_type & N_PEXT))
@@ -28,7 +28,7 @@ char *get_infos_external64(struct nlist_64 *nlist, char *buf)
 
 char *get_infos_external32(struct nlist *nlist, char *buf)
 {
-	if (SWAP16(g_meta.swap, nlist->n_desc) == REFERENCED_DYNAMICALLY && (nlist->n_type \
+	if (SWAP16(g_meta->swap, nlist->n_desc) == REFERENCED_DYNAMICALLY && (nlist->n_type \
 															& N_EXT))
 		strcpy(buf, "[referenced dynamically] external");
 	else if ((nlist->n_type & N_PEXT))

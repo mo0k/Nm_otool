@@ -53,7 +53,7 @@ void						handler_symtab64(void* lc, void *ptr, t_meta *meta)
 //		printf("%p - %p\n", (void*)(nlist + i + 1), ptr + meta->size);
 		//sleep(1);
 		if (CHK_VAL(ptr, ptr + meta->size, (void*)(nlist + i + 1))
-			|| CHK_VAL(ptr, ptr + meta->size, (void*)g_stringtab + nlist[i].n_un.n_strx))
+			|| CHK_VAL(ptr, ptr + meta->size, (void*)g_stringtab + SWAP32(meta->swap, nlist[i].n_un.n_strx)))
 			corrupted("handler_symtab64 2");
 		ft_lstadd_end(&list, ft_lstnew(&nlist[i], sizeof(struct nlist_64)));
 	}

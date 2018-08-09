@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME =				nm
+NAME =				ft_nm
 
 CFLAGS =			-Wall -Werror -Wextra -g
 CC = 				gcc $(CFLAGS)
@@ -60,7 +60,8 @@ SRCS_OPTIONS = 		$(SRCS_OPTIONS_PATH)/get_opts.c
 SRCS_SORT_PATH =	$(SRCS_PATH)/sort
 SRCS_SORT = 		$(SRCS_SORT_PATH)/sort.c \
 					$(SRCS_SORT_PATH)/get_sortfunc.c \
-					$(SRCS_SORT_PATH)/sort_ascii.c
+					$(SRCS_SORT_PATH)/sort_ascii32.c		\
+					$(SRCS_SORT_PATH)/sort_ascii64.c
 
 SRCS_PRINT_PATH = 			$(SRCS_PATH)/print
 SRCS_PRINT_ARCH64_PATH =	$(SRCS_PRINT_PATH)/arch64

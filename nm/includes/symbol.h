@@ -16,7 +16,7 @@
 # define SYMBOL_REF_SECT_COLMAX 0x3
 # define SYMBOL_REF_SECT_ROWMAX 0x5
 # define SYMBOL_REF_NOSECT_COLMAX 0x2
-# define SYMBOL_REF_NOSECT_ROWMAX 0x4
+# define SYMBOL_REF_NOSECT_ROWMAX 0x5
 
 typedef struct 	s_info
 {

@@ -13,6 +13,22 @@
 #include <arch32.h>
 #include <math.h>
 
+static void		display_all(uint32_t index, t_meta *meta, void *ptr)
+{
+	int swap;
+	struct fat_arch		*fat_arch;
+	struct fat_header 	*fat_header;
+
+	fat_header = (struct fat_header*)ptr;
+	fat_arch = (struct fat_arch*)(fat_header + 1);
+	swap = meta->swap;
+	while (index < SWAP32(swap, fat_header->nfat_arch))
+	{
+		nm(ptr + SWAP32(swap, fat_arch[index].offset), meta);
+		++index;
+	}
+}
+
 void		handler_fat32(void *ptr, t_meta *meta)
 {
 	struct fat_header 	*fat_header;
@@ -22,7 +38,10 @@ void		handler_fat32(void *ptr, t_meta *meta)
 	if (!ptr || !meta)
 		return ;
 	fat_header = (struct fat_header*)ptr;
+	
 	meta->swap = (fat_header->magic == FAT_CIGAM) ? 1 : 0;
+	//printf("meta->swap:%d\n", meta->swap);
+
 	fat_arch = (struct fat_arch*)(fat_header + 1);
 	while (++i < SWAP32(meta->swap, fat_header->nfat_arch))
 	{
@@ -35,22 +54,8 @@ void		handler_fat32(void *ptr, t_meta *meta)
 	}
 	if (i == SWAP32(meta->swap, fat_header->nfat_arch))
 		i = 0;
-	nm(ptr + SWAP32(meta->swap, fat_arch[i].offset), meta);
-	/*while (i < SWAP32(meta->swap, fat_header->nfat_arch))
-	{
-		if (CHK_VAL(ptr, ptr + meta->size, (void*)fat_arch + i + 1)
-			|| CHK_VAL(ptr, ptr + meta->size, ptr + SWAP32(meta->swap, fat_arch[i].offset)))	
-			corrupted("handler_fat32");
-		//sleep(1);
-		nm(ptr + SWAP32(meta->swap, fat_arch[i].offset), meta);
-		meta->swap = (fat_header->magic == FAT_CIGAM) ? 1 : 0;
-		if (SWAP32(meta->swap, fat_arch[i].cputype) == CPU_TYPE_X86_64)
-		{
-			//ft_printf("return");
-			return ;
-		}
-		//ft_printf("i++\n");
-		i++;
-	}
-	*/
+	if (SWAP32(meta->swap, fat_arch[i].cputype) == CPU_TYPE_X86_64)
+		return (nm(ptr + SWAP32(meta->swap, fat_arch[i].offset), meta));
+	else
+		return (display_all(i, meta, ptr));
 }

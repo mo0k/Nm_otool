@@ -62,6 +62,7 @@ static void		merge_sort(t_list **lst, t_sfunc sfunc)
 	if (!current || !current->next || !sfunc)
 		return ;
 	divise_lst(current, &lst_1, &lst_2);
+
 	merge_sort(&lst_1, sfunc);
 	merge_sort(&lst_2, sfunc);
 	*lst = sfunc(lst_1, lst_2);
@@ -74,6 +75,7 @@ void			sort(t_list **lst, uint32_t opts, t_sfunc sfunc)
 		return ;
 	if (sfunc)
 		merge_sort(lst, sfunc);
+
 	if (GET_BIT(opts, OPT_r) && !GET_BIT(opts, OPT_p))
 		ft_lstrev(lst);
 }

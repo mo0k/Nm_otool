@@ -27,17 +27,17 @@ char 		*get_dylibname(struct load_command *lc, unsigned int index)
 	P_DEBUG_VARGS("index:%d\n", index);
 	while (count++ < index)
 	{
-		if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)lc + SWAP32(g_meta.swap, lc->cmdsize)))
+		if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)lc + SWAP32(g_meta->swap, lc->cmdsize)))
 			corrupted("get_dylibname 1");
-		lc = (void*)lc + SWAP32(g_meta.swap, lc->cmdsize);
+		lc = (void*)lc + SWAP32(g_meta->swap, lc->cmdsize);
 	}
 	dylib = (t_dylib*)(lc + 1);
 	//check dylib strcut
-	if (CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size, (void*)(dylib + 1))
-		|| CHK_VAL(g_meta.ptr, g_meta.ptr + g_meta.size,
-			(void*)dylib + SWAP32(g_meta.swap, dylib->name.offset)))
+	if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)(dylib + 1))
+		|| CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size,
+			(void*)dylib + SWAP32(g_meta->swap, dylib->name.offset)))
 		corrupted("get_dylibname 2");
-	ptr = strrchr((void*)dylib + SWAP32(g_meta.swap, dylib->name.offset), '/');
-	return ((ptr) ? ptr + 1 : (void*)dylib + SWAP32(g_meta.swap, dylib->name.offset));
+	ptr = strrchr((void*)dylib + SWAP32(g_meta->swap, dylib->name.offset), '/');
+	return ((ptr) ? ptr + 1 : (void*)dylib + SWAP32(g_meta->swap, dylib->name.offset));
 	//return ((void*)dylib + dylib->name.offset);
 }

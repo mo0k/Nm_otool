@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <ft_printf.h>
 
-# define DEBUG 0
+# define DEBUG 1
 
 int g_fd;
 //ajouter global flag_open

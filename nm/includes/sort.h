@@ -20,8 +20,8 @@
 
 
 void			sort(t_list **lst, uint32_t opts, t_sfunc sfunc);
-t_list			*sort_ascii(t_list *, t_list *);
-t_sfunc			get_sortfunc(uint32_t options);
-
+t_list			*sort_ascii32(t_list *, t_list *);
+t_list			*sort_ascii64(t_list *, t_list *);
+t_sfunc			get_sortfunc(uint32_t options, enum e_archtype type);
 
 #endif
