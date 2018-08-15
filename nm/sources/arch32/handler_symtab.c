@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 06:56:27 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/31 22:52:45 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/08/10 14:47:31 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void						handler_symtab32(void* lc, void *ptr, t_meta *meta)
 		//printf("str:%s\n", g_stringtab + SWAP32(meta->swap, nlist[i].n_un.n_strx));
 		if (CHK_VAL(ptr, ptr + meta->size, (void*)g_stringtab + SWAP32(meta->swap, nlist[i].n_un.n_strx)))
 			corrupted("handler_symtab32 3");
+		P_DEBUG_VARGS("str:%s\nsect:0x%x\n\n", g_stringtab + SWAP32(g_meta->swap, nlist[i].n_un.n_strx), nlist[i].n_sect);
 		ft_lstadd_end(&list, ft_lstnew(&nlist[i], sizeof(struct nlist)));
 		//sleep(1);
 	}

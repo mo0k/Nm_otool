@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:11:01 by mo0k              #+#    #+#             */
-/*   Updated: 2018/07/24 20:03:59 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/08/11 00:06:35 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int							main(int ac, char **av)
 		}
 		if (multi && is_simplebin(meta.ptr) && !GET_BIT(meta.options, OPT_m))
 			ft_printf("\n%s:\n", meta.filename);
+		//ft_printf("multi:%d\tsimplebin%d\n", multi, is_simplebin(meta.ptr));
 		nm(meta.ptr, &meta);
 		munmap(meta.ptr, meta.size);
 	}

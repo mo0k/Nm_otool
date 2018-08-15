@@ -6,24 +6,66 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 18:32:41 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/01 14:45:07 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/08/15 11:23:04 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <arch32.h>
 #include <math.h>
 
+# define NBR_ARCH 5
+typedef struct	s_archtype
+{
+	unsigned int	cputype;
+	char		*string;
+}				t_archtype;
+
+static char 	*get_archtype_str(unsigned int cputype)
+{
+	int					i;
+	static t_archtype	tab[NBR_ARCH] = 
+	{
+		{CPU_TYPE_X86_64, "x86_64"},
+		{CPU_TYPE_I386, "i386"},
+		{CPU_TYPE_POWERPC, "ppc"},
+		{CPU_TYPE_POWERPC64, "ppc64"},
+		{CPU_TYPE_X86, "x86"}
+	};
+
+	i = 0;
+	while (i < NBR_ARCH)
+	{
+		if (tab[i].cputype == cputype)
+			return (tab[i].string);
+		i++;
+	}
+	return ("unknown");
+}
+
 static void		display_all(uint32_t index, t_meta *meta, void *ptr)
 {
-	int swap;
+	uint8_t 			swap;
 	struct fat_arch		*fat_arch;
 	struct fat_header 	*fat_header;
+	char				buf[128];
 
 	fat_header = (struct fat_header*)ptr;
 	fat_arch = (struct fat_arch*)(fat_header + 1);
 	swap = meta->swap;
 	while (index < SWAP32(swap, fat_header->nfat_arch))
 	{
+		buf[0] = 0;
+		if (SWAP32(swap, fat_header->nfat_arch) > 1)
+		{
+			ft_strcpy(buf, " (for architecture ");
+			ft_strcat(buf, get_archtype_str(SWAP32(swap, fat_arch[index].cputype)));
+			ft_strcat(buf, ")");	
+		}
+		ft_strcat(buf, ":");
+		if (SWAP32(swap, fat_header->nfat_arch) > 1)
+			ft_printf("\n%s%s\n", meta->filename, buf);
+		else
+			ft_printf("%s%s\n", meta->filename, buf);
 		nm(ptr + SWAP32(swap, fat_arch[index].offset), meta);
 		++index;
 	}

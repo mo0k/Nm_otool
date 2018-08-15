@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 15:11:03 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/10 00:02:16 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/08/11 00:05:24 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <ft_printf.h>
 
-# define DEBUG 1
+# define DEBUG 0
 
 int g_fd;
 //ajouter global flag_open
