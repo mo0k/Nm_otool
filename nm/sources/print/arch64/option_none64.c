@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:31:47 by mo0k              #+#    #+#             */
-/*   Updated: 2018/04/01 19:43:09 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/01 00:23:06 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void						print_option_none_arch64(t_list *list)
 		|| ((elem->n_type & N_TYPE) != N_UNDF && GET_BIT(g_meta->options, OPT_u))
 		|| ((elem->n_type & N_TYPE) == N_UNDF && GET_BIT(g_meta->options, OPT_U)))
 		return;
-	if (SWAP64(g_meta->swap, elem->n_value) || elem->n_type & N_TYPE || (GET_BIT(g_meta->options, OPT_a) && (elem->n_type & N_STAB)))
+	if ((SWAP64(g_meta->swap, elem->n_value) || elem->n_type & N_TYPE ||
+		(GET_BIT(g_meta->options, OPT_a) && (elem->n_type & N_STAB))) && !((elem->n_type & N_TYPE) == N_INDR))
 		ft_printf("%016llx ", SWAP64(g_meta->swap, elem->n_value));
 	else
 		ft_printf("%16s ", "");
@@ -37,6 +38,10 @@ void						print_option_none_arch64(t_list *list)
 						, get_type_stab(elem->n_type)
 						, g_stringtab + SWAP32(g_meta->swap, elem->n_un.n_strx));
 	}
+	else if ((elem->n_type & N_TYPE) == N_INDR)
+		ft_printf("%s %s (indirect for %s)\n", get_symbol64(buf, elem, SYMBOL_CHAR)
+					, g_stringtab + SWAP32(g_meta->swap, elem->n_un.n_strx)
+					, g_stringtab + SWAP32(g_meta->swap, elem->n_un.n_strx));
 	else
 	{
 		ft_printf("%s %s\n", get_symbol64(buf, elem, SYMBOL_CHAR)
