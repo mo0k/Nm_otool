@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:31:29 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/03 00:10:29 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/03 00:15:01 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void						print_option_x_arch64(t_list *list)
 					g_stringtab + SWAP32(g_meta->swap, e->n_un.n_strx)
 					);
 	if ((e->n_type & N_TYPE) == N_INDR)
-		ft_printf(" (indirect for %016llx %s)\n", SWAP64(g_meta->swap, e->n_value)
-					, g_stringtab + SWAP32(g_meta->swap, e->n_un.n_strx));
+		ft_printf(" (indirect for %016llx %s)\n",
+					SWAP64(g_meta->swap, e->n_value),
+					g_stringtab + SWAP32(g_meta->swap, e->n_un.n_strx));
 	else
 		ft_printf("\n");
 }
