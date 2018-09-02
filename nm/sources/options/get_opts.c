@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:31:07 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/31 15:27:06 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/02 23:51:55 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				*get_mask()
 {
-	static int	bit_mask[32] = 
+	static int	bit_mask[32] =
 	{
 		0x00000001, 0x00000002, 0x00000004, 0x00000008,
 		0x00000010, 0x00000020, 0x00000040, 0x00000080,
@@ -61,10 +61,8 @@ int				get_opts(int nb_arg, char **args, uint32_t *index, uint32_t *opts)
 			else
 				return (BAD_OPTION);
 		}
-		//++i;
 	}
 	*index = i + 1;
-	P_DEBUG_VARGS("opt:0x%02x\t%d\t%d\n", *opts, *opts, i);
 	return (SUCCESS);
 }
 

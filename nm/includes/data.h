@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 14:34:38 by mo0k              #+#    #+#             */
-/*   Updated: 2018/07/24 20:00:09 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/02 16:11:23 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,11 @@ enum e_archtype
 	ARCH32,
 	ARCH64
 };
+
+typedef struct		s_archtype
+{
+	unsigned int	cputype;
+	char			*string;
+}					t_archtype;
 
 #endif

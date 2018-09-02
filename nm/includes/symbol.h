@@ -6,17 +6,17 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:36:16 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/09 10:35:05 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/02 16:23:30 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SECT_H
 # define SECT_H
 
-# define SYMBOL_REF_SECT_COLMAX 0x3
-# define SYMBOL_REF_SECT_ROWMAX 0x5
-# define SYMBOL_REF_NOSECT_COLMAX 0x2
-# define SYMBOL_REF_NOSECT_ROWMAX 0x5
+# define SECT_COLMAX 0x3
+# define SECT_ROWMAX 0x5
+# define NOSECT_COLMAX 0x2
+# define NOSECT_ROWMAX 0x5
 
 typedef struct 	s_info
 {

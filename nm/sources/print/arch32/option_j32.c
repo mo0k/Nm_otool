@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:31:40 by mo0k              #+#    #+#             */
-/*   Updated: 2018/04/01 19:41:54 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/02 23:57:12 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void						print_option_j_arch32(t_list *list)
 {
-	struct nlist*			elem;
+	struct nlist*			e;
 
 	if (!list)
 		return ;
-	elem = list->content;
-	if ((elem->n_type & N_STAB && !GET_BIT(g_meta->options, OPT_a))
-		|| ((elem->n_type & N_TYPE) != N_UNDF && GET_BIT(g_meta->options, OPT_u))
-		|| ((elem->n_type & N_TYPE) == N_UNDF && GET_BIT(g_meta->options, OPT_U)))
+	e = list->content;
+	if ((e->n_type & N_STAB && !GET_BIT(g_meta->options, OPT_a))
+		|| ((e->n_type & N_TYPE) != N_UNDF && GET_BIT(g_meta->options, OPT_u))
+		|| ((e->n_type & N_TYPE) == N_UNDF && GET_BIT(g_meta->options, OPT_U)))
 		return;
-	//szap n_strx
 	ft_printf("%s\n", g_stringtab +
 		SWAP32(g_meta->swap, ((struct nlist*)(list->content))->n_un.n_strx));
 }

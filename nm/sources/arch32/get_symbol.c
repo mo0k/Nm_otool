@@ -6,17 +6,17 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/08/10 15:36:29 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/02 23:40:28 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <arch32.h>
 
-static char 		*get_symbol_sect32(char *buf, t_info *info, int colomn, \
+static char			*get_symbol_sect32(char *buf, t_info *info, int colomn, \
 																int is_external)
 {
-	int 		i;
-	static		char *symbol_ref[SYMBOL_REF_SECT_ROWMAX][SYMBOL_REF_SECT_COLMAX] =
+	int			i;
+	static		char *symbol_ref[SECT_ROWMAX][SECT_COLMAX] =
 	{
 		{"__text", "t", "__TEXT"},
 		{"__data", "d", "__DATA"},
@@ -24,76 +24,34 @@ static char 		*get_symbol_sect32(char *buf, t_info *info, int colomn, \
 		{"__common", "s", "__DATA"},
 		{"__const", "s", "__DATA"}
 	};
+
 	i = -1;
-	colomn = colomn > SYMBOL_REF_SECT_COLMAX - 1 ? SYMBOL_REF_SECT_COLMAX - 1: colomn;
-	while (++i < SYMBOL_REF_SECT_ROWMAX)
+	colomn = colomn > SECT_COLMAX - 1 ? SECT_COLMAX - 1: colomn;
+	while (++i < SECT_ROWMAX)
 	{
-			P_DEBUG_VARGS("i:%d,info->segname:%s, info->sectname:%s\n",i, info->segname, info->sectname);
 		if (!ft_strcmp((char*)info->segname, symbol_ref[i][SEGNAME])
 			&& !ft_strcmp((char*)info->sectname, symbol_ref[i][SECTNAME]))
 		{
 			if (!(buf = ft_strcpy(buf, symbol_ref[i][colomn])))
 				return (NULL);
 			if (colomn == SYMBOL_CHAR && is_external)
-				buf[0] -= 32; //upper case
+				buf[0] -= 32;
 			return (buf);
 		}
 	}
-	if (!(buf = ft_strcpy(buf, colomn == SECTNAME ? (char*)info->sectname : "s")))
-				return (NULL);
-			if (colomn == SYMBOL_CHAR && is_external)
-				buf[0] -= 32; //upper case
-			return (buf);
-	
+	return (get_symbol_sect_nofound(buf, info, colomn, is_external));
 }
 
-// Get the section name
-/*
-static t_info 		*get_sect32_info1(t_lc *lc, unsigned int index, t_info *sect)
+static void			next_sect32(t_lc **lc, unsigned int *count, t_meta *meta, \
+																t_seg32 *seg32)
 {
-	//static t_info *sect;
-	t_seg32			*seg32;
-	t_sect32		*sect32;
-	unsigned int 	i;
-
-
-	if (!lc)
-		return (NULL);
-	while (index)
-	{
-		P_DEBUG_VARGS("in get_sect32_info() : index:%d\n", index);
-		seg32 = (t_seg32*)lc;
-		i = SWAP32(g_meta->swap, seg32->nsects);
-		P_DEBUG_VARGS("in get_sect32_info() :  seg32->nsects:%d\n",  SWAP32(g_meta->swap, seg32->nsects));
-		if (i)
-			sect32 = (t_sect32*)(seg32 + 1);
-		while (i)
-		{
-			--index;
-			--i;
-			P_DEBUG_VARGS("in get_sect32_info() : index:%d,i:%d\n", index, i);
-			if (index == 0)
-			{
-				sect->segname = (void*)sect32->segname;
-				sect->sectname = (void*)sect32->sectname;
-				P_DEBUG("return sect\n");
-				return (sect);
-			}
-			sect32 += 1;
-			//P_DEBUG_VARGS("sect->segname:%s, sect->sectname:%s\n", (char*)sect->segname, (char*)sect->sectname);
-		}
-		lc = (void*)lc + SWAP32(g_meta->swap, lc->cmdsize);
-		P_DEBUG("NEXT LC\n");
-	}
-				P_DEBUG("return NULL\n");
-
-	return (NULL);
+	*count += SWAP32(meta->swap, seg32->nsects);
+	*lc = (void*)*lc + SWAP32(meta->swap, (*lc)->cmdsize);
 }
-*/
-t_info 		*get_sect32_info(t_lc *lc, unsigned int index, t_info *sect)
+
+t_info				*get_sect32_info(t_lc *lc, unsigned int index, t_info *sect)
 {
-	//static t_info *sect;
-	unsigned int 	count;
+	unsigned int	count;
 	t_seg32			*seg32;
 	t_sect32		*sect32;
 
@@ -103,83 +61,56 @@ t_info 		*get_sect32_info(t_lc *lc, unsigned int index, t_info *sect)
 	while (count < index)
 	{
 		seg32 = (t_seg32*)lc;
-		//ft_printf("seg32:%p\ng_meta->ptr:%p\nend:%p\n", seg32, g_meta->ptr, g_meta->ptr + g_meta->size);
-		if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)seg32))
-			corrupted("get_sect32_info 1");
-		if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)(seg32 + 1)))
-			corrupted("get_sect32_info 2");	
+		if (CHK_VAL(g_meta, (void*)seg32 + 1))
+			corrupted();
 		if (count + SWAP32(g_meta->swap, seg32->nsects) < index)
-		{
-			count += SWAP32(g_meta->swap, seg32->nsects);
-			P_DEBUG_VARGS("count:%d\n", count);
-			//if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)lc + lc->cmdsize))
-			//	corrupted();
-			lc = (void*)lc + SWAP32(g_meta->swap, lc->cmdsize);
-			P_DEBUG("next\n");
-		}
+			next_sect32(&lc, &count, g_meta, seg32);
 		else
 		{
-			P_DEBUG("ok\n");
 			sect32 = (t_sect32*)(seg32 + 1);
-			//return ((sect32 + (index - count) - 1)->sectname);
-			if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)(sect32 + (index - count))))
-				corrupted("get_sect32_info 2");
-			P_DEBUG_VARGS("index:%d\n", index - count);
-			//sect->segname = (void*)(sect32 + (index - count - 1))->segname;
-			sect->segname = (void*)sect32[index - count -1 ].segname;
+			if (CHK_VAL(g_meta, (void*)(sect32 + (index - count))))
+				corrupted();
+			sect->segname = (void*)sect32[index - count -1].segname;
 			sect->sectname = (void*)(sect32 + (index - count - 1))->sectname;
-			P_DEBUG_VARGS("sect->segname:%s, sect->sectname:%s\n", (char*)sect->segname, (char*)sect->sectname);
 			return (sect);
 		}
 	}
-	
 	return (NULL);
 }
+
 char 				*get_symbol32(char *buf, struct nlist *nlist, int colomn)
 {
 	int 			index;
 	t_info 			info;
-	static int 		type_value[0x4] = {N_UNDF, N_ABS, N_INDR, N_STAB};
-	static char 	*symbol_ref[SYMBOL_REF_NOSECT_ROWMAX][SYMBOL_REF_NOSECT_COLMAX] =
-	{
-		{"undefined", "u"},
-		{"absolute", "a"},
-		{"indirect", "i"},
-		{"common", "c"},
-		{"?", "-"}
-	};
+	static int 		type[0x4] = {N_UNDF, N_ABS, N_INDR, N_STAB};
 
 	if ((nlist->n_type & N_TYPE) == N_SECT)
-	{
-		//ft_printf("(nlist->n_type & N_EXT):%d\n", (nlist->n_type & N_EXT));
-		//ft_printf("g_meta->seg32:%p\n", g_meta->seg32);
 		return (get_symbol_sect32(buf
 					, get_sect32_info(g_meta->seg32, nlist->n_sect, &info)
-					, colomn
-					, (nlist->n_type & N_EXT)));
-	}
+					, colomn, (nlist->n_type & N_EXT)));
 	if (nlist->n_type & N_STAB)
-		return (symbol_ref[0x4][colomn]);
+		return (get_ref(0x4, colomn));
 	index = -0x1;
 	while (++index < 0x3)
-		if (type_value[index] == (nlist->n_type & N_TYPE))
+		if (type[index] == (nlist->n_type & N_TYPE))
 			break;
-	if (type_value[index] == N_UNDF && SWAP32(g_meta->swap, nlist->n_value) != 0)
+	if (type[index] == N_UNDF && SWAP32(g_meta->swap, nlist->n_value) != 0)
 		index = COMMON;
-	if (index != COMMON && type_value[index] != (nlist->n_type & N_TYPE))
+	if (index != COMMON && type[index] != (nlist->n_type & N_TYPE))
 		return (" ");
-	colomn = colomn > SYMBOL_REF_NOSECT_COLMAX - 0x1 ? SYMBOL_REF_NOSECT_COLMAX - 0x1: colomn;
-	if (!(buf = ft_strcpy(buf, symbol_ref[index][colomn])))
+	colomn = colomn > NOSECT_COLMAX - 0x1 ? NOSECT_COLMAX - 0x1: colomn;
+	if (!(buf = ft_strcpy(buf, get_ref(index, colomn))))
 		return (" ");
 	if (colomn == SYMBOL_CHAR && (nlist->n_type & N_EXT))
-		buf[0] -= 0x20; //32
+		buf[0] -= 0x20;
 	return (buf);
 }
 
-char 		*get_seg32_name(t_lc *lc, unsigned int index)
+char 				*get_seg32_name(t_lc *lc, unsigned int index)
 {
 	unsigned int 	count;
 	t_seg32			*seg32;
+
 	if (!lc)
 		return (NULL);
 	count = 0;
@@ -189,13 +120,12 @@ char 		*get_seg32_name(t_lc *lc, unsigned int index)
 		if (count + SWAP32(g_meta->swap, seg32->nsects) < index)
 		{
 			count += SWAP32(g_meta->swap, seg32->nsects);
-			if (CHK_VAL(g_meta->ptr, g_meta->ptr + g_meta->size, (void*)lc + lc->cmdsize))
-				corrupted("get_seg32_name");
+			if (CHK_VAL(g_meta, (void*)lc + lc->cmdsize))
+				corrupted();
 			lc = (void*)lc + lc->cmdsize;
 		}
 		else
 			return (seg32->segname);
 	}
-	ft_printf("return NULL\n");
 	return (NULL);
 }

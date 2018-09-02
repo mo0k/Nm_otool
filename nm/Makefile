@@ -6,7 +6,7 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/05/09 14:43:11 by mo0k             ###   ########.fr        #
+#    Updated: 2018/09/02 23:41:51 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,11 @@ SRCS_COMMON_PATH =	$(SRCS_PATH)/common
 SRCS_COMMON = 		$(SRCS_COMMON_PATH)/get_dylibname.c \
 					$(SRCS_COMMON_PATH)/get_type_stab.c \
 					$(SRCS_COMMON_PATH)/corrupted.c \
+					$(SRCS_COMMON_PATH)/get_symbol_sect_nofound.c \
+					$(SRCS_COMMON_PATH)/get_info_lc.c \
+					$(SRCS_COMMON_PATH)/sort_display_clean.c \
+					$(SRCS_COMMON_PATH)/del.c \
+					$(SRCS_COMMON_PATH)/get_ref.c \
 					$(SRCS_COMMON_PATH)/infos_external.c
 
 SRCS_OPTIONS_PATH =	$(SRCS_PATH)/options

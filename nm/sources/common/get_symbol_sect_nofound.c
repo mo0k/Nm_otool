@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_printfunc64.c                                  :+:      :+:    :+:   */
+/*   get_symbol_sect_nofound.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/18 15:27:17 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/02 23:56:45 by mo0k             ###   ########.fr       */
+/*   Created: 2018/09/02 15:34:22 by mo0k              #+#    #+#             */
+/*   Updated: 2018/09/02 23:50:28 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <print.h>
+#include <common.h>
 
-t_pfunc						get_printfunc_arch64(uint32_t options)
+char 		*get_symbol_sect_nofound(char *buf, t_info *info,
+													int colomn, int is_external)
 {
-	if (GET_BIT(options, OPT_j) ||
-		(GET_BIT(options, OPT_u) &&!GET_BIT(options, OPT_m)))
-		return (&print_option_j_arch64);
-	else if (GET_BIT(options, OPT_x))
-		return (&print_option_x_arch64);
-	else if (GET_BIT(options, OPT_m))
-		return (&print_option_m_arch64);
-	else
-		return (&print_option_none_arch64);
+	if (!(buf = ft_strcpy(buf, colomn == SECTNAME ? (char*)info->sectname 
+													: "s")))
+		return (NULL);
+	if (colomn == SYMBOL_CHAR && is_external)
+		buf[0] -= 32;
+	return (buf);
 }

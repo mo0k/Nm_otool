@@ -13,8 +13,8 @@ fi
 /bin/rm $FILE_TRACE
 for i in `find $PATH_DIR -name "*" -type f`; do
 	echo  "\n$i" >> $FILE_TRACE
-	$CMD1 $ARGS $i > diff1 2>&1
-	$CMD2 $ARGS $i > diff2 2>&1
+	$CMD1 $ARGS $i > diff1 #2>&1
+	$CMD2 $ARGS $i > diff2 #2>&1
 	diff diff1 diff2 >> $FILE_TRACE 2>&1
 	#sleep 1
 done
