@@ -1,10 +1,10 @@
 #!/bin/sh
 
-ARGS=$3
+ARGS=$5
 PATH_DIR=$1
 FILE_TRACE=$2
-CMD1="nm"
-CMD2="./ft_nm"
+CMD1=$3
+CMD2=$4
 
 if [ ! -d $PATH_DIR ]; then
 	echo "argument 1 is not a directory"

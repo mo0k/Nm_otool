@@ -6,7 +6,7 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/05/09 23:49:00 by mo0k             ###   ########.fr        #
+#    Updated: 2018/09/04 23:19:41 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRCS_PATH = 		sources
 
 SRCS_32_PATH =		$(SRCS_PATH)/arch32
 SRCS_32 = 			$(SRCS_32_PATH)/handler.c \
-					$(SRCS_32_PATH)/handler_fat.c
+					$(SRCS_32_PATH)/handler_fat.c \
+					$(SRCS_32_PATH)/print.c
 
 SRCS_64_PATH =		$(SRCS_PATH)/arch64
 SRCS_64 = 			$(SRCS_64_PATH)/handler.c

@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 06:51:43 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/09 23:51:46 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 23:17:45 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 
 void		handler32(void *ptr, t_meta *meta);
 void		handler_fat32(void *ptr, t_meta *meta);
+void		display32(t_meta *meta, void *ptr);
 
 #endif

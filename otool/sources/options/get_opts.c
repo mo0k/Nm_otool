@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:31:07 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/31 15:27:06 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 23:03:29 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int				print_error(int error)
 		"opts argument missing or null",
 		"option not valid"
 	};
+	
 	memmove(message, "Error opts: ", 12);
 	memmove(message + 12, strerror[error], 32);
 	return (printf("%s\n", message));

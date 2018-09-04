@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:02:32 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/09 14:38:54 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 22:55:51 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include <data.h>
 # include <ft_printf.h>
 # include <swap_bit.h>
-#include  <string.h>
 
-# define CHK_VAL(beg, end, cur) ((cur < beg || cur >= end))
+# define BEG(x) (x->ptr)
+# define END(x) (x->ptr + x->size)
+# define CHK_VAL(file, cur) ((cur < BEG(file) || cur >= END(file)))
 
 void		corrupted(char *str);
 

@@ -6,12 +6,17 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 18:32:41 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/09 23:50:10 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 23:15:01 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/arch32.h"
 #include <math.h>
+
+/*
+** ADD VERIF MEMERY
+**
+*/
 
 void		handler_fat32(void *ptr, t_meta *meta)
 {
@@ -26,12 +31,11 @@ void		handler_fat32(void *ptr, t_meta *meta)
 	fat_arch = (struct fat_arch*)(fat_header + 1);
 	while (++i < SWAP32(meta->swap, fat_header->nfat_arch))
 	{
-		if (CHK_VAL(ptr, ptr + meta->size, (void*)fat_arch + i + 1)
-			|| CHK_VAL(ptr, ptr + meta->size, ptr + SWAP32(meta->swap, fat_arch[i].offset)))	
+		if (CHK_VAL(meta, (void*)fat_arch + i + 1)
+			|| CHK_VAL(meta, ptr + SWAP32(meta->swap, fat_arch[i].offset)))	
 			corrupted("handler_fat32");
 		if (SWAP32(meta->swap, fat_arch[i].cputype) == CPU_TYPE_X86_64)
 			break;
-
 	}
 	if (i == SWAP32(meta->swap, fat_header->nfat_arch))
 		i = 0;
