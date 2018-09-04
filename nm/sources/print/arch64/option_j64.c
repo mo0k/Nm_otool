@@ -6,15 +6,15 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:31:40 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/02 23:57:37 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:25:35 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <print.h>
 
-void						print_option_j_arch64(t_list *list)
+void				print_option_j_arch64(t_list *list)
 {
-	struct nlist_64*			e;
+	struct nlist_64*	e;
 
 	if (!list)
 		return ;

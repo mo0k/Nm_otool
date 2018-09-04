@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:25:16 by mo0k              #+#    #+#             */
-/*   Updated: 2018/03/29 17:29:04 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:27:24 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ void				print_option_none_arch64(t_list *list);
 void				print_option_j_arch64(t_list *list);
 void				print_option_x_arch64(t_list *list);
 void				print_option_m_arch64(t_list *list);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 06:51:43 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/09 13:35:13 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:26:38 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 void		handler_fat32(void *ptr, t_meta *meta);
 void		handler32(void *ptr, t_meta *meta);
 void		handler_symtab32(void* lc, void *ptr, t_meta *meta);
-char 		*get_seg32_name(t_lc *lc, unsigned int index);
-char 		*get_symbol32(char *buf, struct nlist *nlist, int colomn);
-
+char		*get_seg32_name(t_lc *lc, unsigned int index);
+char		*get_symbol32(char *buf, struct nlist *nlist, int colomn);
 
 #endif

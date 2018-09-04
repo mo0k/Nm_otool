@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:01:17 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/02 23:49:43 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/03 00:25:18 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char 		*get_dylibname(struct load_command *lc, unsigned int index)
 		|| CHK_VAL(g_meta,
 			(void*)dylib + SWAP32(g_meta->swap, dylib->name.offset)))
 		corrupted();
-	ptr = strrchr((void*)dylib + SWAP32(g_meta->swap, dylib->name.offset), '/');
+	ptr = ft_strrchr((void*)dylib + SWAP32(g_meta->swap, dylib->name.offset)
+						, '/');
 	return ((ptr) ? ptr + 1
 					: (void*)dylib + SWAP32(g_meta->swap, dylib->name.offset));
 }

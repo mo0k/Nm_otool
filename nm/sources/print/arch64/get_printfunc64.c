@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:27:17 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/02 23:56:45 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:23:27 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ t_pfunc						get_printfunc_arch64(uint32_t options)
 		return (&print_option_j_arch64);
 	else if (GET_BIT(options, OPT_x))
 		return (&print_option_x_arch64);
-	else if (GET_BIT(options, OPT_m))
-		return (&print_option_m_arch64);
 	else
 		return (&print_option_none_arch64);
 }

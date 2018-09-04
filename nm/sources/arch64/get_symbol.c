@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/02 23:40:45 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:28:36 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static t_info 		*get_sect64_info(t_lc *lc, unsigned int index, t_info *info)
 	return (NULL);
 }
 
-char 				*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn)
+char				*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn)
 {
 	int 			index;
 	t_info 			info;
@@ -106,7 +106,7 @@ char 				*get_symbol64(char *buf, struct nlist_64 *nlist, int colomn)
 	return (buf);
 }
 
-char 				*get_seg64_name(t_lc *lc, unsigned int index)
+char				*get_seg64_name(t_lc *lc, unsigned int index)
 {
 	unsigned int 	count;
 	t_seg64			*seg64;

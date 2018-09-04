@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 09:40:42 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/09 12:04:39 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:27:33 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <libft.h>
 # include <get_opts.h>
 # include <data.h>
-
 
 void			sort(t_list **lst, uint32_t opts, t_sfunc sfunc);
 t_list			*sort_ascii32(t_list *, t_list *);

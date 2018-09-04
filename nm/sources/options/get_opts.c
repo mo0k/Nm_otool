@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:31:07 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/02 23:51:55 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:26:01 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				get_opts(int nb_arg, char **args, uint32_t *index, uint32_t *opts)
 		j = 0;
 		while (args[i][++j])
 		{
-			if ((ptr = strchr(OPTIONS, args[i][j])) != NULL)
+			if ((ptr = ft_strchr(OPTIONS, args[i][j])) != NULL)
 				SET_BIT(*opts, ptr - OPTIONS);
 			else
 				return (BAD_OPTION);
@@ -78,7 +78,8 @@ int				print_error(int error)
 		"opts argument missing or null",
 		"option not valid"
 	};
-	memmove(message, "Error opts: ", 12);
-	memmove(message + 12, strerror[error], 32);
-	return (printf("%s\n", message));
+	
+	ft_memmove(message, "Error opts: ", 12);
+	ft_memmove(message + 12, strerror[error], 32);
+	return (ft_printf("%s\n", message));
 }

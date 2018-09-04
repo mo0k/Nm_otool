@@ -6,16 +6,16 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:31:47 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/01 00:23:06 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:25:43 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <print.h>
 
-void						print_option_none_arch64(t_list *list)
+void				print_option_none_arch64(t_list *list)
 {
-	struct nlist_64*			elem;
-	char 						buf[85];
+	struct nlist_64*	elem;
+	char 				buf[85];
 
 	if (!list)
 		return ;

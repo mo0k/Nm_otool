@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:33:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/02 23:40:28 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/04 21:28:27 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_info				*get_sect32_info(t_lc *lc, unsigned int index, t_info *sect)
 	return (NULL);
 }
 
-char 				*get_symbol32(char *buf, struct nlist *nlist, int colomn)
+char				*get_symbol32(char *buf, struct nlist *nlist, int colomn)
 {
 	int 			index;
 	t_info 			info;
@@ -106,7 +106,7 @@ char 				*get_symbol32(char *buf, struct nlist *nlist, int colomn)
 	return (buf);
 }
 
-char 				*get_seg32_name(t_lc *lc, unsigned int index)
+char				*get_seg32_name(t_lc *lc, unsigned int index)
 {
 	unsigned int 	count;
 	t_seg32			*seg32;
