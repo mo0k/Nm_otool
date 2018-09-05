@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 14:34:38 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/04 21:27:14 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/06 00:03:34 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct 			s_meta
 	char					*filename;
 	void					*ptr;
 	size_t					size;
+	t_list					*nlist;
 }							t_meta;
 
 t_meta			*g_meta;

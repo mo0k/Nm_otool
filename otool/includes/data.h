@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 14:34:38 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/04 22:35:00 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/05 19:26:53 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,11 @@ typedef struct 			s_meta
 }							t_meta;
 
 t_meta			*g_meta;
+
+typedef struct		s_archtype
+{
+	unsigned int	cputype;
+	char			*string;
+}					t_archtype;
 
 #endif

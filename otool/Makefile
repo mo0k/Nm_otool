@@ -6,11 +6,11 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/09/04 23:19:41 by mo0k             ###   ########.fr        #
+#    Updated: 2018/09/06 00:21:19 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =				otool
+NAME =				ft_otool
 
 CFLAGS =			-Wall -Werror -Wextra -g
 CC = 				gcc $(CFLAGS)
@@ -40,7 +40,8 @@ SRCS_32 = 			$(SRCS_32_PATH)/handler.c \
 					$(SRCS_32_PATH)/print.c
 
 SRCS_64_PATH =		$(SRCS_PATH)/arch64
-SRCS_64 = 			$(SRCS_64_PATH)/handler.c
+SRCS_64 = 			$(SRCS_64_PATH)/handler.c \
+					$(SRCS_64_PATH)/print.c
 
 
 SRCS_COMMON_PATH =	$(SRCS_PATH)/common

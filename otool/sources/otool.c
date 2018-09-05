@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:01:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/04 23:07:25 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/06 00:10:23 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		usage()
 
 void 	otool(void *ptr, t_meta *meta)
 {
-	P_DEBUG("Launch function nm\n");
+	P_DEBUG("Launch function otool\n");
 	meta->sect_text = 0;
 	meta->sect_data = 0;
 	if (!ptr || !meta)
@@ -68,7 +68,6 @@ int main(int ac, char **av)
 	uint32_t				error;
 	uint32_t 				index;
 	t_meta					meta;
-	//uint8_t					multi;
 
 	g_meta = &meta;
 	g_meta->options = 0x00000000;
@@ -76,7 +75,6 @@ int main(int ac, char **av)
 		return usage();
 	if ((error = get_opts(ac - 1, av + 1, &index ,&g_meta->options)))
 		return (print_error(error));
-	//multi = (index + 1 < (uint32_t)ac) ? 1 : 0;
 	--index;
 	while (++index < (uint32_t)ac)
 	{
@@ -84,14 +82,11 @@ int main(int ac, char **av)
 		if ((error = open_file(&g_meta->ptr, &g_meta->size, g_meta->filename, O_RDONLY)))
 		{
 			perror(g_meta->filename);
-			//continue;
 			return (error);
 		}
 		if ((GET_BIT(g_meta->options, OPT_d) || GET_BIT(g_meta->options, OPT_t))
 			&& is_valid_bin(g_meta->ptr))
 			ft_printf("%s:\n", g_meta->filename);
-		//if (multi && is_simplebin(g_meta->ptr) && !GET_BIT(g_meta->options, OPT_m))
-		//	ft_printf("\n%s:\n", g_meta->filename);
 		otool(g_meta->ptr, g_meta);
 		munmap(g_meta->ptr, g_meta->size);
 		//sleep(1);

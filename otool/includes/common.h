@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:02:32 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/04 22:55:51 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/06 00:07:40 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 # define END(x) (x->ptr + x->size)
 # define CHK_VAL(file, cur) ((cur < BEG(file) || cur >= END(file)))
 
-void		corrupted(char *str);
+void		corrupted();
 
 #endif

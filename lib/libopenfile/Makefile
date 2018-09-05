@@ -6,7 +6,7 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/31 09:06:42 by mo0ky             #+#    #+#              #
-#    Updated: 2018/05/09 13:50:38 by mo0k             ###   ########.fr        #
+#    Updated: 2018/09/05 23:20:53 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,10 @@ SRCS_PATH = sources
 SRCS =	$(SRCS_PATH)/open_file.c
 
 OBJS	= $(SRCS:%.c=%.o)
+
+LIB_PATH = ../libftprintf
+LIB = libftprintf.a
+
 C_LGREEN = "\033[92m"
 C_LRED = "\033[91m"
 C_RED = "\033[31m"
@@ -33,7 +37,7 @@ all: $(NAME)
 
 $(NAME): $(INCS) $(OBJS_PATH) $(OBJS) Makefile
 	ar rcs $(NAME) $(OBJS)
-	libtool -static -o $(NAME) $(OBJS) $(LIB)
+	libtool -static -o $(NAME) $(OBJS)
 	@echo $(C_LGREEN)"$(NAME) compiled"$(C_DFL)
 
 %.o: %.c

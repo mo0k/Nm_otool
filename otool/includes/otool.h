@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:39:22 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/04 22:33:37 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/05 22:44:23 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 // indirect			i /
 
 # define ERROR_STR "./otool :"
+# define NBR_ARCH 5
 
 void 	otool(void *ptr, t_meta *meta);
 

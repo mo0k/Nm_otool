@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 06:51:43 by mo0k              #+#    #+#             */
-/*   Updated: 2018/07/24 19:56:25 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/05 23:15:58 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/mman.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <ft_printf.h>
 
 enum e_return
 {

@@ -6,15 +6,15 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 22:59:54 by mo0k              #+#    #+#             */
-/*   Updated: 2018/05/09 14:38:50 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/06 00:17:42 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/common.h"
 
-void corrupted(char *str)
+void corrupted(void)
 {
 	//free all mem
-	ft_printf("corrupted: %s\n", str);
+	ft_dprintf(2, "Corrupted\n");
 	exit(EXIT_FAILURE);
 }
