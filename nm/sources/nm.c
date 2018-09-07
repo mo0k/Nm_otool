@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:11:01 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/05 23:13:27 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/07 11:50:20 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,30 @@ static int					is_simplebin(void *ptr)
 
 void 						nm(void *ptr, t_meta *meta)
 {
-	P_DEBUG_VARGS("Launch function nm ; ptr(%p)\n", ptr);
+	//P_DEBUG_VARGS("Launch function nm ; ptr(%p)\n", ptr);
 	if (!ptr || !meta)
 		return ;
 	
 	if (*(unsigned int*)ptr == MH_MAGIC_64 || *(unsigned int*)ptr == MH_CIGAM_64)
 	{
-		P_DEBUG("binary 64 bits\n");
+		//P_DEBUG("binary 64 bits\n");
 		meta->sortfunc = get_sortfunc(meta->options, ARCH64);
 		meta->printfunc = get_printfunc_arch64(meta->options);
 		handler64(ptr, meta);
 	}
 	else if (*(unsigned int*)ptr == MH_MAGIC || *(unsigned int*)ptr == MH_CIGAM)
 	{
-		P_DEBUG("binay 32 bits\n");
-		P_DEBUG_VARGS("magic number:0x%08x\n", *(unsigned int*)ptr);
+		//P_DEBUG("binay 32 bits\n");
+		//P_DEBUG_VARGS("magic number:0x%08x\n", *(unsigned int*)ptr);
 		meta->printfunc = get_printfunc_arch32(meta->options);
 		meta->sortfunc = get_sortfunc(meta->options, ARCH32);
 		handler32(ptr, meta);
 	}
 	else if (*(unsigned int*)ptr == FAT_MAGIC || *(unsigned int*)ptr == FAT_CIGAM)
 	{
-		P_DEBUG("FAT 32\n");
-		P_DEBUG_VARGS("magic number:0x%08x\n", *(unsigned int*)ptr);
+		//P_DEBUG("FAT 32\n");
+		//P_DEBUG_VARGS("magic number:0x%08x\n", *(unsigned int*)ptr);
 		handler_fat32(ptr, meta);
-	}
-	else if (*(unsigned int*)ptr == FAT_MAGIC_64 || *(unsigned int*)ptr == FAT_CIGAM_64)
-	{
-		P_DEBUG("FAT 64\n");
-		P_DEBUG_VARGS("magic number:0x%08x\n", *(unsigned int*)ptr);
-
 	}
 	else
 		ft_dprintf(2, "%s: %s The file was not recognized as a valid object file\n\n", ft_getenv("_"), meta->filename);

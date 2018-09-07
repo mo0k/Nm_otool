@@ -6,7 +6,7 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/31 09:06:42 by mo0ky             #+#    #+#              #
-#    Updated: 2018/08/15 11:22:34 by mo0k             ###   ########.fr        #
+#    Updated: 2018/09/07 11:43:22 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS_LIBFT = $(LIBFT_PATH)/ft_strlen.c 	\
 				$(LIBFT_PATH)/ft_memrcpy.c \
 				$(LIBFT_PATH)/ft_memset.c \
 				$(LIBFT_PATH)/ft_strchr.c \
+				$(LIBFT_PATH)/ft_strrchr.c \
 				$(LIBFT_PATH)/ft_strcmp.c \
 				$(LIBFT_PATH)/ft_strcpy.c \
 				$(LIBFT_PATH)/ft_strncpy.c \

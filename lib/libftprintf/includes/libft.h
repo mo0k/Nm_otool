@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:50:56 by jmoucade          #+#    #+#             */
-/*   Updated: 2018/08/15 11:23:52 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/07 11:45:33 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memrcpy(void *dst, const void *src, size_t n);
 char				*ft_strchr(const char *s, int c);
+char				*ft_strrchr(const char *s, int c);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strncpy(char *dest, const char *src, size_t n);

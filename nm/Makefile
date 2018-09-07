@@ -6,7 +6,7 @@
 #    By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 09:22:47 by mo0k              #+#    #+#              #
-#    Updated: 2018/09/02 23:41:51 by mo0k             ###   ########.fr        #
+#    Updated: 2018/09/07 11:47:46 by mo0k             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,14 +73,12 @@ SRCS_PRINT_ARCH64_PATH =	$(SRCS_PRINT_PATH)/arch64
 SRCS_PRINT_ARCH64 = 		$(SRCS_PRINT_ARCH64_PATH)/get_printfunc64.c \
 							$(SRCS_PRINT_ARCH64_PATH)/option_none64.c \
 							$(SRCS_PRINT_ARCH64_PATH)/option_x64.c \
-							$(SRCS_PRINT_ARCH64_PATH)/option_j64.c \
-							$(SRCS_PRINT_ARCH64_PATH)/option_m64.c
+							$(SRCS_PRINT_ARCH64_PATH)/option_j64.c
 SRCS_PRINT_ARCH32_PATH =	$(SRCS_PRINT_PATH)/arch32
 SRCS_PRINT_ARCH32 = 		$(SRCS_PRINT_ARCH32_PATH)/get_printfunc32.c \
 							$(SRCS_PRINT_ARCH32_PATH)/option_none32.c \
 							$(SRCS_PRINT_ARCH32_PATH)/option_x32.c \
-							$(SRCS_PRINT_ARCH32_PATH)/option_j32.c \
-							$(SRCS_PRINT_ARCH32_PATH)/option_m32.c
+							$(SRCS_PRINT_ARCH32_PATH)/option_j32.c
 
 SRCS_PRINT = 		$(SRCS_PRINT_ARCH64) $(SRCS_PRINT_ARCH32)
 

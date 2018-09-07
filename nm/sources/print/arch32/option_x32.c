@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 15:31:29 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/03 00:16:03 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/07 11:48:59 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void						print_option_x_arch32(t_list *list)
 						elem->n_un.n_strx,
 						g_stringtab + SWAP32(g_meta->swap, elem->n_un.n_strx)
 						);
-	if ((e->n_type & N_TYPE) == N_INDR)
+	if ((elem->n_type & N_TYPE) == N_INDR)
 		ft_printf(" (indirect for %016llx %s)\n",
-					SWAP32(g_meta->swap, e->n_value),
-					g_stringtab + SWAP32(g_meta->swap, e->n_un.n_strx));
+					SWAP32(g_meta->swap, elem->n_value),
+					g_stringtab + SWAP32(g_meta->swap, elem->n_un.n_strx));
 	else
 		ft_printf("\n");
 }
