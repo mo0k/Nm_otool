@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 10:11:01 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/07 11:50:20 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/07 12:05:55 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void 						nm(void *ptr, t_meta *meta)
 	//P_DEBUG_VARGS("Launch function nm ; ptr(%p)\n", ptr);
 	if (!ptr || !meta)
 		return ;
-	
 	if (*(unsigned int*)ptr == MH_MAGIC_64 || *(unsigned int*)ptr == MH_CIGAM_64)
 	{
 		//P_DEBUG("binary 64 bits\n");
@@ -58,6 +57,23 @@ void 						nm(void *ptr, t_meta *meta)
 		ft_dprintf(2, "%s: %s The file was not recognized as a valid object file\n\n", ft_getenv("_"), meta->filename);
 }
 
+int						do_nm(char *filename, uint8_t multi, t_meta *meta)
+{
+	uint32_t				error;
+
+	meta->filename = filename;
+	if ((error = open_file(&meta->ptr, &meta->size, meta->filename, O_RDONLY)))
+	{
+		open_error(error, meta->filename);
+		return (1);
+	}
+	if (multi && is_simplebin(meta->ptr))
+		ft_printf("\n%s:\n", meta->filename);
+	nm(meta->ptr, meta);
+	munmap(meta->ptr, meta->size);
+	return (0);
+}
+
 int							main(int ac, char **av)
 {
 	uint32_t				error;
@@ -75,16 +91,8 @@ int							main(int ac, char **av)
 	--index;
 	while (++index < (uint32_t)ac)
 	{
-		meta.filename = av[index];
-		if ((error = open_file(&meta.ptr, &meta.size, meta.filename, O_RDONLY)))
-		{
-			open_error(error, meta.filename);
+		if (do_nm(av[index], multi, &meta) == 1)
 			continue;
-		}
-		if (multi && is_simplebin(meta.ptr))
-			ft_printf("\n%s:\n", meta.filename);
-		nm(meta.ptr, &meta);
-		munmap(meta.ptr, meta.size);
 	}
 	return (0);
 }
