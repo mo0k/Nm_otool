@@ -6,7 +6,7 @@
 /*   By: mo0k <mo0k@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:01:21 by mo0k              #+#    #+#             */
-/*   Updated: 2018/09/06 00:10:23 by mo0k             ###   ########.fr       */
+/*   Updated: 2018/09/07 12:56:17 by mo0k             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		usage()
 {
-	dprintf(2, "./otool -%s binary_file\n", OPTIONS);
+	ft_dprintf(2, "./otool -%s binary_file\n", OPTIONS);
 	return (1);
 }
 
